@@ -8,10 +8,12 @@
 #import "MovieViewController.h"
 #import "myTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "DetailsViewController.h"
 
 @interface MovieViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSArray *myArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation MovieViewController
@@ -24,6 +26,13 @@ NSArray *info;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [self fetchMovies];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+}
+
+- (void)fetchMovies {
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=9dc97edc3c5a6f1ceb43e5dd36fa6f4c"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -40,6 +49,7 @@ NSArray *info;
                // TODO: Reload your table view data
                [self.tableView reloadData];
            }
+        [self.refreshControl endRefreshing];
        }];
     [task resume];
 }
@@ -55,7 +65,6 @@ NSArray *info;
     NSString *posterURLString = movie[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-//    cell.posterImage.image = nil;
     [cell.posterImage setImageWithURL:posterURL placeholderImage:nil];
     return cell;
 }
@@ -64,14 +73,16 @@ NSArray *info;
     return self.myArray.count;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    NSDictionary *dataToPass = self.myArray[[self.tableView indexPathForCell:sender].row];
+    DetailsViewController *detailVC = [segue destinationViewController];
+    detailVC.detailDict = dataToPass;
 }
-*/
 
 @end

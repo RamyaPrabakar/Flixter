@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1A0225285BC70D007D5C83 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A0224285BC70D007D5C83 /* DetailsViewController.m */; };
 		4F1CA8C0285A744300FA5C65 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CA8BF285A744300FA5C65 /* MovieViewController.m */; };
 		4F1CA8C3285A891000FA5C65 /* myTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CA8C2285A891000FA5C65 /* myTableViewCell.m */; };
 		4F7AA11D285A4E4800B2A17C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7AA11C285A4E4800B2A17C /* AppDelegate.m */; };
@@ -43,6 +44,8 @@
 /* Begin PBXFileReference section */
 		0040E93AA92AAEDD5AA8D46D /* Pods_FlixterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlixterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		063B2CB7B8CBCEC8E3C4D816 /* Pods-FlixterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlixterTests.release.xcconfig"; path = "Target Support Files/Pods-FlixterTests/Pods-FlixterTests.release.xcconfig"; sourceTree = "<group>"; };
+		4F1A0223285BC70D007D5C83 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		4F1A0224285BC70D007D5C83 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		4F1CA8BE285A744300FA5C65 /* MovieViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
 		4F1CA8BF285A744300FA5C65 /* MovieViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		4F1CA8C1285A891000FA5C65 /* myTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myTableViewCell.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				4F7AA129285A4E4900B2A17C /* LaunchScreen.storyboard */,
 				4F7AA12C285A4E4900B2A17C /* Info.plist */,
 				4F7AA12D285A4E4900B2A17C /* main.m */,
+				4F1A0223285BC70D007D5C83 /* DetailsViewController.h */,
+				4F1A0224285BC70D007D5C83 /* DetailsViewController.m */,
 			);
 			path = Flixter;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				4F7AA11D285A4E4800B2A17C /* AppDelegate.m in Sources */,
 				4F7AA12E285A4E4900B2A17C /* main.m in Sources */,
 				4F7AA120285A4E4800B2A17C /* SceneDelegate.m in Sources */,
+				4F1A0225285BC70D007D5C83 /* DetailsViewController.m in Sources */,
 				4F1CA8C0285A744300FA5C65 /* MovieViewController.m in Sources */,
 				4F1CA8C3285A891000FA5C65 /* myTableViewCell.m in Sources */,
 			);
