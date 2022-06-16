@@ -6,11 +6,11 @@ target 'Flixter' do
   use_frameworks!
 
   # Pods for Flixter
+  pod 'AFNetworking'
 
   target 'FlixterTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'AFNetworking'
   end
 
   target 'FlixterUITests' do
