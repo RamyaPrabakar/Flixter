@@ -41,6 +41,23 @@ NSArray *info;
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
                NSLog(@"%@", [error localizedDescription]);
+               
+               // alerting
+               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
+                                                                                          message:@"The internet connection appears to be offline."
+                                                                                   preferredStyle:(UIAlertControllerStyleAlert)];
+               
+               UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                        // handle try again response here. Doing nothing will dismiss the view.
+                                                                 }];
+               // add the try again action to the alertController
+               [alert addAction:tryAgainAction];
+               
+               [self presentViewController:alert animated:YES completion:^{
+                   [self fetchMovies];
+               }];
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
