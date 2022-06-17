@@ -8,6 +8,7 @@
 #import "GridViewController.h"
 #import "MyCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "DetailsViewController.h""
 
 @interface GridViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSArray *myArray;
@@ -85,14 +86,14 @@
     return self.myArray.count;
 }
 
-/*
-#pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    NSDictionary *dataToPass = self.myArray[[self.collectionView indexPathForCell:sender].item];
+    DetailsViewController *detailVC = [segue destinationViewController];
+    detailVC.detailDict = dataToPass;
 }
-*/
 
 @end
