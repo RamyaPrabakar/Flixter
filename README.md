@@ -43,9 +43,7 @@ Here's a walkthrough of implemented user stories:
 
 <img src='Final_Version_AdobeExpress.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' width="800" 
      height="950"/>
-<img src='finalWorking.mp4' title='Video Walkthrough' width='' alt='Video Walkthrough' width="800" 
-     height="950"/>
-
+     
 GIF created with [Adobe Express](https://www.adobe.com/express/feature/video/convert/mov-to-gif).
 
 ## Notes
