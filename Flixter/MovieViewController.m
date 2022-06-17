@@ -31,6 +31,7 @@ NSArray *info;
     self.searchBar.delegate = self;
     [self fetchMovies];
     [self.activityIndicator startAnimating];
+    self.activityIndicator.hidesWhenStopped = true;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
@@ -73,8 +74,9 @@ NSArray *info;
                [self.tableView reloadData];
            }
         [self.refreshControl endRefreshing];
-        [self.activityIndicator stopAnimating];
        }];
+    
+    [self.activityIndicator stopAnimating];
     [task resume];
 }
 
