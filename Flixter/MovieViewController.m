@@ -10,8 +10,10 @@
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MovieViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MovieViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) NSArray *myArray;
+@property (strong, nonatomic) NSArray *filteredData;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -26,6 +28,7 @@ NSArray *info;
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
     [self fetchMovies];
     [self.activityIndicator startAnimating];
     
@@ -64,6 +67,7 @@ NSArray *info;
                
                // TODO: Get the array of movies
                self.myArray = dataDictionary[@"results"];
+               self.filteredData = self.myArray;
                
                // TODO: Reload your table view data
                [self.tableView reloadData];
@@ -77,7 +81,7 @@ NSArray *info;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     myTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
-    NSDictionary *movie = self.myArray[indexPath.row];
+    NSDictionary *movie = self.filteredData[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
     
@@ -90,7 +94,42 @@ NSArray *info;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.myArray.count;
+    return self.filteredData.count;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (searchText.length != 0) {
+        NSPredicate *predicate   = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@",
+                @"title", searchText];
+        
+        self.filteredData = [self.myArray filteredArrayUsingPredicate:predicate];
+        
+        NSLog(@"%@", self.filteredData);
+        
+    }
+    else {
+        self.filteredData = self.myArray;
+    }
+    
+    [self.tableView reloadData];
+ 
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    self.filteredData = self.myArray;
+    [self.tableView reloadData];
+    [self.searchBar resignFirstResponder];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark - Navigation
@@ -100,7 +139,7 @@ NSArray *info;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    NSDictionary *dataToPass = self.myArray[[self.tableView indexPathForCell:sender].row];
+    NSDictionary *dataToPass = self.filteredData[[self.tableView indexPathForCell:sender].row];
     DetailsViewController *detailVC = [segue destinationViewController];
     detailVC.detailDict = dataToPass;
 }
