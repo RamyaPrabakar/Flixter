@@ -20,13 +20,19 @@
     self.moveTitleLabel.text = self.detailDict[@"title"];
     self.movieDescriptionLabel.text = self.detailDict[@"overview"];
     
-    // setting the poster images
+    // setting the poster image
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = self.detailDict[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     
-    [self.bigPosterImage setImageWithURL:posterURL placeholderImage:nil];
+    // setting the backdrop image
+    NSString *backDropURLString = self.detailDict[@"backdrop_path"];
+    NSString *fullBackDropURLString = [baseURLString stringByAppendingString:backDropURLString];
+    NSURL *backDropURL = [NSURL URLWithString:fullBackDropURLString];
+
+    
+    [self.bigPosterImage setImageWithURL:backDropURL placeholderImage:nil];
     [self.smallPosterImage setImageWithURL:posterURL placeholderImage:nil];
 }
 
