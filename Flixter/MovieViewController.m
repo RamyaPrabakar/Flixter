@@ -113,7 +113,6 @@ NSArray *info;
     }
     
     [self.tableView reloadData];
- 
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
